@@ -9,7 +9,7 @@ export default {
 
 <template>
   <div class="col my-3">
-    <div class="box" :class="classToAdd">{{ answer }}</div>
+    <div class="box box-answer" :class="classToAdd">{{ answer }}</div>
   </div>
 </template>
 

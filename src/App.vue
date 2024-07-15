@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       questions,
+      extractedQuestions: [],
       questionId: 0,
       stringClassToAdd: "",
       isClicked: false,
@@ -23,8 +24,30 @@ export default {
   },
   methods: {
     selectRandomQuestion() {
-      this.questionId = Math.floor(Math.random() * this.questions.length);
+      //Verifica fine partita per estrazione di tutte le domande
+      if (this.extractedQuestions.length === this.questions.length) {
+        return console.log("fine partita");
+      }
+
+      //Reset
+      let containerElement = document.querySelector(".container");
+      containerElement.classList.remove("blocked");
+      this.stringClassToAdd = "";
+      this.isClicked = false;
+      this.isCorrect = false;
+      this.idSelectedAnswer = null;
+
+      //Estrazione random domanda con esclusione delle domande già estratte
+      do {
+        this.questionId = Math.floor(Math.random() * this.questions.length);
+      } while (
+        this.extractedQuestions.includes(this.questions[this.questionId])
+      );
+
+      this.extractedQuestions.push(this.questions[this.questionId]);
     },
+
+    //Verifica risposta cliccata dall'utente
     checkAnswer(index) {
       this.idSelectedAnswer = index;
       this.isClicked = true;
@@ -35,6 +58,10 @@ export default {
         this.isCorrect = false;
         this.stringClassToAdd = "wrong";
       }
+
+      //Aggiunta blocco sul container delle domande per evitare l'utente possa ricliccare dopo aver dato la risposta
+      let containerElement = document.querySelector(".container");
+      containerElement.classList.add("blocked");
     },
   },
   mounted() {
@@ -64,6 +91,12 @@ export default {
       </div>
     </div>
   </main>
+
+  <footer>
+    <button @click="selectRandomQuestion()" class="btn btn-light">
+      Prossima domanda
+    </button>
+  </footer>
 </template>
 
 <style lang="scss">
@@ -80,8 +113,15 @@ header {
 main {
   text-align: center;
   background-color: #11093a;
-  height: calc(100vh - 360px);
+  height: calc(100vh - 360px - 100px);
   color: white;
   padding-top: 20px;
+}
+
+footer {
+  text-align: center;
+  background-color: #11093a;
+  height: 100px;
+  padding: 20px;
 }
 </style>
