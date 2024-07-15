@@ -20,13 +20,17 @@ export default {
       isClicked: false,
       isCorrect: false,
       idSelectedAnswer: null,
+      correctAnswers: 0,
+      wrongAnswers: 0,
+      endGame: false,
     };
   },
   methods: {
     selectRandomQuestion() {
       //Verifica fine partita per estrazione di tutte le domande
       if (this.extractedQuestions.length === this.questions.length) {
-        return console.log("fine partita");
+        this.endGame = true;
+        return;
       }
 
       //Reset
@@ -53,15 +57,25 @@ export default {
       this.isClicked = true;
       if (index === this.questions[this.questionId].correctAnswerId) {
         this.isCorrect = true;
+        this.correctAnswers++;
         this.stringClassToAdd = "correct";
       } else {
         this.isCorrect = false;
+        this.wrongAnswers++;
         this.stringClassToAdd = "wrong";
       }
 
       //Aggiunta blocco sul container delle domande per evitare l'utente possa ricliccare dopo aver dato la risposta
       let containerElement = document.querySelector(".container");
       containerElement.classList.add("blocked");
+    },
+
+    resetGame() {
+      this.endGame = false;
+      this.extractedQuestions = [];
+      this.correctAnswers = 0;
+      this.wrongAnswers = 0;
+      this.selectRandomQuestion();
     },
   },
   mounted() {
@@ -93,9 +107,15 @@ export default {
   </main>
 
   <footer>
-    <button @click="selectRandomQuestion()" class="btn btn-light">
+    <button @click="selectRandomQuestion()" class="btn btn-light mx-2">
       Prossima domanda
     </button>
+    <button @click="resetGame()" class="btn btn-light mx-2">Rinizia</button>
+    <div v-if="endGame" class="my-2">
+      Partita terminata <br />
+      Hai riposto correttamente a {{ correctAnswers }} domande su
+      {{ questions.length }}
+    </div>
   </footer>
 </template>
 
@@ -113,7 +133,7 @@ header {
 main {
   text-align: center;
   background-color: #11093a;
-  height: calc(100vh - 360px - 100px);
+  height: calc(100vh - 360px - 150px);
   color: white;
   padding-top: 20px;
 }
@@ -121,7 +141,8 @@ main {
 footer {
   text-align: center;
   background-color: #11093a;
-  height: 100px;
+  height: 150px;
   padding: 20px;
+  color: white;
 }
 </style>

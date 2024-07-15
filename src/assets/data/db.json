@@ -33,6 +33,72 @@
       "level": 1,
       "answers": ["Raccogliere", "Introdurre", "Scrivere", "Seminare"],
       "correctAnswerId": 0
+    },
+    {
+      "text": "Secondo uno studio pubblicato dalla Harvard Medical School, quale tra le attività elencate brucia più calorie in 30 minuti?",
+      "level": 1,
+      "answers": [
+        "Giocare a biliardo",
+        "Fare la spesa col carrello",
+        "Lavorare al computer",
+        "Interrare piantine"
+      ],
+      "correctAnswerId": 3
+    },
+    {
+      "text": "Qual è il secondo settore economico per importanza nel Pil mondiale?",
+      "level": 1,
+      "answers": [
+        "Agricolutura e allevamento",
+        "Industria",
+        "Servizi",
+        "Costruzioni"
+      ],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Chi tra quelli elencati è stato il primo artista/gruppo di fama internazionale a rendere disponibile a pagamento un suo album completo per il download da Internet?",
+      "level": 1,
+      "answers": [
+        "Freddie Mercury",
+        "David Bowie",
+        "John Lennon",
+        "The Beatles"
+      ],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Chi tra queste famose donne della storia visse prima?",
+      "level": 1,
+      "answers": [
+        "Calamity Jane",
+        "Pocahontas",
+        "Giovanna d'Arco",
+        "Maria Teresa d'Asburgo"
+      ],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Nel 2010 veniva caricata una foto che apriva la rivoluzionaria era di un nuovo social network: Instagram.Oltre a un cane, cosa ritraeva?",
+      "level": 1,
+      "answers": [
+        "Un tacos",
+        "Una rivista di moda",
+        "Una sedia",
+        "Un piede femminile"
+      ],
+      "correctAnswerId": 3
+    },
+    {
+      "text": "Nella sua prima apparizione all’American International Toy Fair del 1961 cosa indossava Ken, il fidanzato di Barbie?",
+      "level": 1,
+      "answers": [
+        "Un costume da bagno",
+        "Uno smoking",
+        "Una tuta",
+        "Un cappello da chef"
+      ],
+      "correctAnswerId": 0
     }
   ]
 }
