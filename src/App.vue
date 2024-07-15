@@ -15,12 +15,26 @@ export default {
     return {
       questions,
       questionId: 0,
+      stringClassToAdd: "",
+      isClicked: false,
+      isCorrect: false,
+      idSelectedAnswer: null,
     };
   },
   methods: {
     selectRandomQuestion() {
-      this.questionId = Math.floor(Math.random() * questions.length);
-      console.log(questions.length);
+      this.questionId = Math.floor(Math.random() * this.questions.length);
+    },
+    checkAnswer(index) {
+      this.idSelectedAnswer = index;
+      this.isClicked = true;
+      if (index === this.questions[this.questionId].correctAnswerId) {
+        this.isCorrect = true;
+        this.stringClassToAdd = "correct";
+      } else {
+        this.isCorrect = false;
+        this.stringClassToAdd = "wrong";
+      }
     },
   },
   mounted() {
@@ -42,13 +56,19 @@ export default {
           v-for="(answer, index) in questions[questionId].answers"
           :key="index"
           :answer="answer"
+          :classToAdd="
+            isClicked && idSelectedAnswer === index ? stringClassToAdd : ''
+          "
+          @click="checkAnswer(index)"
         />
       </div>
     </div>
   </main>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "./assets/scss/main.scss";
+
 header {
   background-color: #12148c;
   height: 360px;
