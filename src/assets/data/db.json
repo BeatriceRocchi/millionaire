@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "text": "Di che materiale è fatta la punta di un giavellotto olimpico?",
+      "level": 1,
+      "answers": ["Plastica", "Metallo", "Carta", "Legno"],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Chi è stato il primo calciatore italiano a vincere la Scarpa d'Oro, il premio che si assegna al miglior goleador del calcio europeo?",
+      "level": 1,
+      "answers": [
+        "Luca Toni",
+        "Fabio Cannavaro",
+        "Gianluigi Buffon",
+        "Alessandro Del Piero"
+      ],
+      "correctAnswerId": 0
+    },
+    {
+      "text": "Nell'Italia Repubblicana, quale tra i partiti politici elencati non ha espresso almeno un presidente del consiglio che militasse nelle sue fila?",
+      "level": 1,
+      "answers": [
+        "Partito Socialista",
+        "Partito Democratico",
+        "Partito Liberale",
+        "Partito Comunista"
+      ],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Il verbo leggere deriva dal latino legere, affine a un verbo greco che originariamente significava anche...?",
+      "level": 1,
+      "answers": ["Raccogliere", "Introdurre", "Scrivere", "Seminare"],
+      "correctAnswerId": 0
+    }
+  ]
+}
