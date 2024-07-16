@@ -19,7 +19,7 @@
     },
     {
       "text": "Nell'Italia Repubblicana, quale tra i partiti politici elencati non ha espresso almeno un presidente del consiglio che militasse nelle sue fila?",
-      "level": 1,
+      "level": 10,
       "answers": [
         "Partito Socialista",
         "Partito Democratico",
@@ -30,13 +30,13 @@
     },
     {
       "text": "Il verbo leggere deriva dal latino legere, affine a un verbo greco che originariamente significava anche...?",
-      "level": 1,
+      "level": 8,
       "answers": ["Raccogliere", "Introdurre", "Scrivere", "Seminare"],
       "correctAnswerId": 0
     },
     {
       "text": "Secondo uno studio pubblicato dalla Harvard Medical School, quale tra le attività elencate brucia più calorie in 30 minuti?",
-      "level": 1,
+      "level": 9,
       "answers": [
         "Giocare a biliardo",
         "Fare la spesa col carrello",
@@ -47,7 +47,7 @@
     },
     {
       "text": "Qual è il secondo settore economico per importanza nel Pil mondiale?",
-      "level": 1,
+      "level": 7,
       "answers": [
         "Agricolutura e allevamento",
         "Industria",
@@ -58,7 +58,7 @@
     },
     {
       "text": "Chi tra quelli elencati è stato il primo artista/gruppo di fama internazionale a rendere disponibile a pagamento un suo album completo per il download da Internet?",
-      "level": 1,
+      "level": 6,
       "answers": [
         "Freddie Mercury",
         "David Bowie",
@@ -80,7 +80,7 @@
     },
     {
       "text": "Nel 2010 veniva caricata una foto che apriva la rivoluzionaria era di un nuovo social network: Instagram.Oltre a un cane, cosa ritraeva?",
-      "level": 1,
+      "level": 5,
       "answers": [
         "Un tacos",
         "Una rivista di moda",
@@ -91,7 +91,7 @@
     },
     {
       "text": "Nella sua prima apparizione all’American International Toy Fair del 1961 cosa indossava Ken, il fidanzato di Barbie?",
-      "level": 1,
+      "level": 4,
       "answers": [
         "Un costume da bagno",
         "Uno smoking",
@@ -99,6 +99,169 @@
         "Un cappello da chef"
       ],
       "correctAnswerId": 0
+    },
+    {
+      "text": "Quale città è la capitale del Canada?",
+      "level": 3,
+      "answers": ["Toronto", "Ottawa", "Vancouver", "Montreal"],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Chi ha dipinto la Gioconda?",
+      "level": 2,
+      "answers": [
+        "Vincent van Gogh",
+        "Michelangelo",
+        "Leonardo da Vinci",
+        "Pablo Picasso"
+      ],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "In che anno è caduto il Muro di Berlino?",
+      "level": 5,
+      "answers": ["1987", "1988", "1989", "1990"],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Quale pianeta è conosciuto come il Pianeta Rosso?",
+      "level": 1,
+      "answers": ["Mercurio", "Venere", "Marte", "Giove"],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Chi ha scritto 'Il Signore degli Anelli'?",
+      "level": 4,
+      "answers": [
+        "J.K. Rowling",
+        "George R.R. Martin",
+        "J.R.R. Tolkien",
+        "C.S. Lewis"
+      ],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Quale è il più grande oceano della Terra?",
+      "level": 3,
+      "answers": [
+        "Oceano Atlantico",
+        "Oceano Indiano",
+        "Oceano Pacifico",
+        "Oceano Artico"
+      ],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Qual è il simbolo chimico dell'oro?",
+      "level": 2,
+      "answers": ["Ag", "Au", "O", "Pb"],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "In quale anno ha avuto luogo lo sbarco sulla Luna?",
+      "level": 4,
+      "answers": ["1967", "1968", "1969", "1970"],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Quale nazione è famosa per il 'tango'?",
+      "level": 3,
+      "answers": ["Brasile", "Argentina", "Spagna", "Italia"],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Chi ha formulato la teoria della relatività?",
+      "level": 2,
+      "answers": [
+        "Isaac Newton",
+        "Albert Einstein",
+        "Galileo Galilei",
+        "Niels Bohr"
+      ],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Quale autore ha scritto 'Il Piccolo Principe'?",
+      "level": 4,
+      "answers": [
+        "Antoine de Saint-Exupéry",
+        "Jules Verne",
+        "Marcel Proust",
+        "Victor Hugo"
+      ],
+      "correctAnswerId": 0
+    },
+    {
+      "text": "Qual è la capitale dell'Australia?",
+      "level": 3,
+      "answers": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "correctAnswerId": 2
+    },
+    {
+      "text": "Chi ha scritto 'Don Chisciotte'?",
+      "level": 5,
+      "answers": [
+        "Gabriel García Márquez",
+        "Miguel de Cervantes",
+        "Pablo Neruda",
+        "Federico García Lorca"
+      ],
+      "correctAnswerId": 1
+    },
+    {
+      "text": "Quale metallo è liquido a temperatura ambiente?",
+      "level": 4,
+      "answers": ["Mercurio", "Ferro", "Piombo", "Argento"],
+      "correctAnswerId": 0
+    },
+    {
+      "text": "Qual è il monte più alto del mondo?",
+      "level": 3,
+      "answers": ["K2", "Monte Bianco", "Monte Everest", "Monte Kilimanjaro"],
+      "correctAnswerId": 2
+    }
+  ],
+
+  "levels": [
+    {
+      "level": 10,
+      "winning": 1000000
+    },
+    {
+      "level": 9,
+      "winning": 600000
+    },
+    {
+      "level": 8,
+      "winning": 300000
+    },
+    {
+      "level": 7,
+      "winning": 150000
+    },
+    {
+      "level": 6,
+      "winning": 30000
+    },
+    {
+      "level": 5,
+      "winning": 15000
+    },
+    {
+      "level": 4,
+      "winning": 7000
+    },
+    {
+      "level": 3,
+      "winning": 3000
+    },
+    {
+      "level": 2,
+      "winning": 1500
+    },
+    {
+      "level": 1,
+      "winning": 500
     }
   ]
 }

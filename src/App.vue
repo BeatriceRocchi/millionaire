@@ -1,18 +1,24 @@
 <script>
-import LogoContainer from "./components/LogoContainer.vue";
+import Header from "./components/partials/Header.vue";
 import Question from "./components/Question.vue";
 import Answer from "./components/Answer.vue";
-
+import Footer from "./components/partials/Footer.vue";
+import Aside from "./components/partials/Aside.vue";
+import { store } from "./assets/data/store";
 import { questions } from "./assets/data/db.json";
+
 export default {
   components: {
-    LogoContainer,
+    Header,
     Question,
     Answer,
+    Footer,
+    Aside,
   },
 
   data() {
     return {
+      store,
       questions,
       extractedQuestions: [],
       questionId: 0,
@@ -22,14 +28,21 @@ export default {
       idSelectedAnswer: null,
       correctAnswers: 0,
       wrongAnswers: 0,
-      endGame: false,
+      currentLevel: 1,
     };
   },
   methods: {
     selectRandomQuestion() {
-      //Verifica fine partita per estrazione di tutte le domande
-      if (this.extractedQuestions.length === this.questions.length) {
-        this.endGame = true;
+      console.log("Livello di gioco", this.currentLevel);
+      //Verifica fine partita per estrazione di tutte le domande (solo per versione non classica)
+      // if (this.extractedQuestions.length === this.questions.length) {
+      //   store.endGame = true;
+      //   return;
+      // }
+
+      //Verifica fine partita per raggiungimento ultimo livello (10)
+      if (this.currentLevel === 10) {
+        store.endGame = true;
         return;
       }
 
@@ -41,14 +54,22 @@ export default {
       this.isCorrect = false;
       this.idSelectedAnswer = null;
 
-      //Estrazione random domanda con esclusione delle domande già estratte
+      //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
+      // do {
+      //   this.questionId = Math.floor(Math.random() * this.questions.length);
+      // } while (
+      //   this.extractedQuestions.includes(this.questions[this.questionId]) &&
+      //   this.questions[this.questionId].level === this.currentLevel
+      // );
+
+      // this.extractedQuestions.push(this.questions[this.questionId]);
+
+      //Estrazione random domanda sulla base del livello
       do {
         this.questionId = Math.floor(Math.random() * this.questions.length);
-      } while (
-        this.extractedQuestions.includes(this.questions[this.questionId])
-      );
+      } while (this.questions[this.questionId].level !== this.currentLevel);
 
-      this.extractedQuestions.push(this.questions[this.questionId]);
+      console.log("Livello domanda", this.questions[this.questionId].level);
     },
 
     //Verifica risposta cliccata dall'utente
@@ -57,12 +78,14 @@ export default {
       this.isClicked = true;
       if (index === this.questions[this.questionId].correctAnswerId) {
         this.isCorrect = true;
-        this.correctAnswers++;
+        this.store.correctAnswers++;
+        this.currentLevel++;
         this.stringClassToAdd = "correct";
       } else {
         this.isCorrect = false;
-        this.wrongAnswers++;
+        this.store.wrongAnswers++;
         this.stringClassToAdd = "wrong";
+        store.endGame = true;
       }
 
       //Aggiunta blocco sul container delle domande per evitare l'utente possa ricliccare dopo aver dato la risposta
@@ -71,10 +94,11 @@ export default {
     },
 
     resetGame() {
-      this.endGame = false;
+      store.endGame = false;
       this.extractedQuestions = [];
-      this.correctAnswers = 0;
-      this.wrongAnswers = 0;
+      this.store.correctAnswers = 0;
+      this.store.wrongAnswers = 0;
+      this.currentLevel = 1;
       this.selectRandomQuestion();
     },
   },
@@ -85,64 +109,53 @@ export default {
 </script>
 
 <template>
-  <header>
-    <LogoContainer />
-  </header>
+  <div class="wrapper d-flex">
+    <div class="left">
+      <Header />
 
-  <main>
-    <Question :question="questions[questionId]" />
-    <div class="container my-5">
-      <div class="row row-cols-2">
-        <Answer
-          v-for="(answer, index) in questions[questionId].answers"
-          :key="index"
-          :answer="answer"
-          :classToAdd="
-            isClicked && idSelectedAnswer === index ? stringClassToAdd : ''
-          "
-          @click="checkAnswer(index)"
-        />
-      </div>
-    </div>
-  </main>
+      <main>
+        <Question :question="questions[questionId]" />
+        <div class="container my-5">
+          <div class="row row-cols-1 row-cols-lg-2">
+            <Answer
+              v-for="(answer, index) in questions[questionId].answers"
+              :key="index"
+              :answer="answer"
+              :classToAdd="
+                isClicked && idSelectedAnswer === index ? stringClassToAdd : ''
+              "
+              @click="checkAnswer(index)"
+            />
+          </div>
+        </div>
+      </main>
 
-  <footer>
-    <button @click="selectRandomQuestion()" class="btn btn-light mx-2">
-      Prossima domanda
-    </button>
-    <button @click="resetGame()" class="btn btn-light mx-2">Rinizia</button>
-    <div v-if="endGame" class="my-2">
-      Partita terminata <br />
-      Hai riposto correttamente a {{ correctAnswers }} domande su
-      {{ questions.length }}
+      <Footer
+        @selectRandomQuestion="selectRandomQuestion"
+        @resetGame="resetGame"
+      />
     </div>
-  </footer>
+    <Aside />
+  </div>
 </template>
 
 <style lang="scss">
 @import "./assets/scss/main.scss";
+.left {
+  flex-grow: 1;
+  main {
+    text-align: center;
+    background-color: #11093a;
+    color: white;
+    padding: 20px 40px;
+  }
 
-header {
-  background-color: #12148c;
-  height: 360px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main {
-  text-align: center;
-  background-color: #11093a;
-  height: calc(100vh - 360px - 150px);
-  color: white;
-  padding-top: 20px;
-}
-
-footer {
-  text-align: center;
-  background-color: #11093a;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  footer {
+    text-align: center;
+    background-color: #11093a;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
 }
 </style>
