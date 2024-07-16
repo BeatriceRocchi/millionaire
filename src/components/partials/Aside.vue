@@ -13,7 +13,11 @@ export default {
   <aside class="d-none d-lg-block">
     <div class="text-center">AIUTI</div>
     <ul>
-      <li v-for="(item, id) in store.levels" :key="id">
+      <li
+        v-for="(item, id) in store.levels"
+        :key="id"
+        :class="store.currentLevel === item.level ? 'active' : ''"
+      >
         {{ item.level }} <span class="mx-2">&#9670;</span> {{ item.winning }}
       </li>
     </ul>

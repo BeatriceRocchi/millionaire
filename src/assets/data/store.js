@@ -14,4 +14,5 @@ export const store = reactive({
   correctAnswers: 0,
   wrongAnswers: 0,
   endGame: false,
+  currentLevel: 1,
 });

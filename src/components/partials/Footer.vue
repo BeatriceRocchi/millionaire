@@ -28,7 +28,10 @@ export default {
       Prossima domanda
     </button>
     <button @click="resetGame()" class="btn btn-light mx-2">Rinizia</button>
-    <div v-if="store.endGame" class="my-2">
+    <div v-if="store.endGame && store.currentLevel === 10" class="my-2">
+      Complimenti hai vinto!
+    </div>
+    <div v-else-if="store.endGame" class="my-2">
       Partita terminata <br />
       Hai riposto correttamente a {{ store.correctAnswers }} domande
     </div>

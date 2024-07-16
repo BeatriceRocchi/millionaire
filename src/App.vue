@@ -28,12 +28,11 @@ export default {
       idSelectedAnswer: null,
       correctAnswers: 0,
       wrongAnswers: 0,
-      currentLevel: 1,
     };
   },
   methods: {
     selectRandomQuestion() {
-      console.log("Livello di gioco", this.currentLevel);
+      console.log("Livello di gioco", store.currentLevel);
       //Verifica fine partita per estrazione di tutte le domande (solo per versione non classica)
       // if (this.extractedQuestions.length === this.questions.length) {
       //   store.endGame = true;
@@ -41,7 +40,7 @@ export default {
       // }
 
       //Verifica fine partita per raggiungimento ultimo livello (10)
-      if (this.currentLevel === 10) {
+      if (store.currentLevel === 10) {
         store.endGame = true;
         return;
       }
@@ -67,7 +66,7 @@ export default {
       //Estrazione random domanda sulla base del livello
       do {
         this.questionId = Math.floor(Math.random() * this.questions.length);
-      } while (this.questions[this.questionId].level !== this.currentLevel);
+      } while (this.questions[this.questionId].level !== store.currentLevel);
 
       console.log("Livello domanda", this.questions[this.questionId].level);
     },
@@ -79,7 +78,7 @@ export default {
       if (index === this.questions[this.questionId].correctAnswerId) {
         this.isCorrect = true;
         this.store.correctAnswers++;
-        this.currentLevel++;
+        store.currentLevel++;
         this.stringClassToAdd = "correct";
       } else {
         this.isCorrect = false;
@@ -98,7 +97,7 @@ export default {
       this.extractedQuestions = [];
       this.store.correctAnswers = 0;
       this.store.wrongAnswers = 0;
-      this.currentLevel = 1;
+      store.currentLevel = 1;
       this.selectRandomQuestion();
     },
   },
