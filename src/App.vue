@@ -23,16 +23,16 @@ export default {
       extractedQuestions: [],
       questionId: 0,
       stringClassToAdd: "",
-      isClicked: false,
-      isCorrect: false,
       idSelectedAnswer: null,
       correctAnswers: 0,
       wrongAnswers: 0,
     };
   },
   methods: {
+    // Selezione domanda random: all'aprirsi dell'applicazione e ogni volta che la risposta è corretta, viene estratta una risposta random sulla base del livello.
     selectRandomQuestion() {
-      console.log("Livello di gioco", store.currentLevel);
+      store.currentLevel++;
+
       //Verifica fine partita per estrazione di tutte le domande (solo per versione non classica)
       // if (this.extractedQuestions.length === this.questions.length) {
       //   store.endGame = true;
@@ -40,17 +40,17 @@ export default {
       // }
 
       //Verifica fine partita per raggiungimento ultimo livello (10)
-      if (store.currentLevel === 10) {
-        store.endGame = true;
-        return;
-      }
+      // if (store.currentLevel === 11) {
+      //   store.endGame = true;
+      //   return;
+      // }
 
       //Reset
       let containerElement = document.querySelector(".container");
       containerElement.classList.remove("blocked");
       this.stringClassToAdd = "";
-      this.isClicked = false;
-      this.isCorrect = false;
+      store.isClicked = false;
+      store.isCorrect = false;
       this.idSelectedAnswer = null;
 
       //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
@@ -67,21 +67,24 @@ export default {
       do {
         this.questionId = Math.floor(Math.random() * this.questions.length);
       } while (this.questions[this.questionId].level !== store.currentLevel);
-
-      console.log("Livello domanda", this.questions[this.questionId].level);
     },
 
     //Verifica risposta cliccata dall'utente
-    checkAnswer(index) {
-      this.idSelectedAnswer = index;
-      this.isClicked = true;
-      if (index === this.questions[this.questionId].correctAnswerId) {
-        this.isCorrect = true;
+    checkAnswer() {
+      if (
+        this.idSelectedAnswer ===
+        this.questions[this.questionId].correctAnswerId
+      ) {
+        store.isCorrect = true;
         this.store.correctAnswers++;
-        store.currentLevel++;
         this.stringClassToAdd = "correct";
+
+        if (store.currentLevel === 10) {
+          store.endGame = true;
+          return;
+        }
       } else {
-        this.isCorrect = false;
+        store.isCorrect = false;
         this.store.wrongAnswers++;
         this.stringClassToAdd = "wrong";
         store.endGame = true;
@@ -97,8 +100,14 @@ export default {
       this.extractedQuestions = [];
       this.store.correctAnswers = 0;
       this.store.wrongAnswers = 0;
-      store.currentLevel = 1;
+      store.currentLevel = 0;
       this.selectRandomQuestion();
+    },
+
+    turnOnQuestion(index) {
+      this.idSelectedAnswer = index;
+      store.isClicked = true;
+      this.stringClassToAdd = "temporary";
     },
   },
   mounted() {
@@ -121,9 +130,11 @@ export default {
               :key="index"
               :answer="answer"
               :classToAdd="
-                isClicked && idSelectedAnswer === index ? stringClassToAdd : ''
+                store.isClicked && idSelectedAnswer === index
+                  ? stringClassToAdd
+                  : ''
               "
-              @click="checkAnswer(index)"
+              @click="turnOnQuestion(index)"
             />
           </div>
         </div>
@@ -132,6 +143,7 @@ export default {
       <Footer
         @selectRandomQuestion="selectRandomQuestion"
         @resetGame="resetGame"
+        @checkAnswer="checkAnswer"
       />
     </div>
     <Aside />

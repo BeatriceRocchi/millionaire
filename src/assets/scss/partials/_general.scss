@@ -9,16 +9,20 @@ body {
   background-color: #11093a;
 }
 
-.box {
+.text-box {
   display: inline-block;
   padding: 20px 150px;
   border: 1px solid white;
-  border-radius: 90em;
+  border-radius: 30px;
 
   &-answer {
-    width: 80%;
+    width: 60%;
     padding: 20px 0;
   }
+}
+
+.temporary {
+  background-color: orange;
 }
 
 .correct {

@@ -8,6 +8,9 @@ export default {
     };
   },
   methods: {
+    checkAnswer() {
+      this.$emit("checkAnswer");
+    },
     selectRandomQuestion() {
       this.$emit("selectRandomQuestion");
     },
@@ -20,15 +23,37 @@ export default {
 
 <template>
   <footer>
+    <!-- Button per confermare la risposta -->
     <button
-      v-if="!store.endGame"
+      v-if="!store.endGame && store.isClicked && !store.isCorrect"
+      @click="checkAnswer()"
+      class="btn btn-light mx-2"
+    >
+      L'accendiamo?
+    </button>
+
+    <!-- Button per accedere a domanda successiva (visibile finchè si è in gioco) -->
+    <button
+      v-if="!store.endGame && store.isCorrect"
       @click="selectRandomQuestion()"
       class="btn btn-light mx-2"
     >
       Prossima domanda
     </button>
-    <button @click="resetGame()" class="btn btn-light mx-2">Rinizia</button>
-    <div v-if="store.endGame && store.currentLevel === 10" class="my-2">
+
+    <!-- Button per riniziare il gioco (visibile solo se si sbaglia) -->
+    <button
+      v-if="store.endGame"
+      @click="resetGame()"
+      class="btn btn-light mx-2"
+    >
+      Rinizia
+    </button>
+
+    <div
+      v-if="store.currentLevel === 10 && store.endGame && store.isCorrect"
+      class="my-2"
+    >
       Complimenti hai vinto!
     </div>
     <div v-else-if="store.endGame" class="my-2">

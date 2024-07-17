@@ -17,6 +17,7 @@ export default {
         v-for="(item, id) in store.levels"
         :key="id"
         :class="store.currentLevel === item.level ? 'active' : ''"
+        class="text-box"
       >
         {{ item.level }} <span class="mx-2">&#9670;</span> {{ item.winning }}
       </li>
@@ -26,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-  width: 350px;
+  width: 300px;
   flex-shrink: 0;
   background-color: #11093a;
   border-left: 3px solid white;
@@ -40,8 +41,8 @@ aside {
 
     li {
       font-size: 1.2rem;
-      margin-bottom: 10px;
-      padding: 15px;
+      margin-bottom: 15px;
+      padding: 10px;
 
       &.active {
         background-color: orange;
