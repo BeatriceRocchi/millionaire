@@ -18,6 +18,12 @@ body {
   &-answer {
     width: 60%;
     padding: 20px 0;
+    transition: all 0.5s;
+
+    &:hover {
+      box-shadow: 0px 0px 15px 2px rgba(white, 0.5);
+      cursor: pointer;
+    }
   }
 }
 
@@ -27,12 +33,19 @@ body {
 
 .correct {
   background-color: #6ecd07;
+  border-color: #6ecd07;
 }
 
 .wrong {
   background-color: red;
+  border-color: red;
 }
 
 .blocked {
   pointer-events: none;
+}
+
+.blocked-blur {
+  pointer-events: none;
+  filter: brightness(70%);
 }

@@ -6,13 +6,41 @@ export default {
       store,
     };
   },
+  methods: {
+    fiftyFity() {
+      store.fiftyFiftyClicked = true;
+      console.log(store.fiftyFiftyClicked);
+      this.$emit("fiftyFity");
+    },
+  },
 };
 </script>
 
 <template>
   <aside class="d-none d-lg-block">
-    <div class="text-center">AIUTI</div>
-    <ul>
+    <ul class="d-flex justify-content-center align-items-center">
+      <li>
+        <button class="btn btn-custom-help">
+          <i class="fa-solid fa-phone-volume"></i>
+        </button>
+      </li>
+      <li>
+        <button class="btn btn-custom-help">
+          <i class="fa-solid fa-users"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          class="btn btn-custom-help"
+          :class="store.fiftyFiftyClicked ? 'blocked-blur' : ''"
+          @click="fiftyFity()"
+        >
+          50:50
+        </button>
+      </li>
+    </ul>
+
+    <ul class="d-flex flex-column">
       <li
         v-for="(item, id) in store.levels"
         :key="id"
@@ -30,10 +58,11 @@ aside {
   width: 300px;
   flex-shrink: 0;
   background-color: #11093a;
-  border-left: 3px solid white;
+  box-shadow: #11093a;
+  border-left: 3px solid #227fb3;
   color: white;
-  padding: 50px;
-  // background: radial-gradient(#12148c, #11093a);
+  padding: 30px 20px;
+  background: radial-gradient(#12148c, #11093a);
 
   ul {
     list-style: none;
@@ -43,6 +72,7 @@ aside {
       font-size: 1.2rem;
       margin-bottom: 15px;
       padding: 10px;
+      width: fit-content;
 
       &.active {
         background-color: orange;

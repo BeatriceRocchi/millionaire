@@ -15,4 +15,5 @@ export const store = reactive({
   wrongAnswers: 0,
   endGame: false,
   currentLevel: 0,
+  fiftyFiftyClicked: false,
 });

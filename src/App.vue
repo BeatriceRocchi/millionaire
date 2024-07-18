@@ -26,6 +26,8 @@ export default {
       idSelectedAnswer: null,
       correctAnswers: 0,
       wrongAnswers: 0,
+      randomAnswers: [],
+      randomAnswerId: 0,
     };
   },
   methods: {
@@ -52,6 +54,7 @@ export default {
       store.isClicked = false;
       store.isCorrect = false;
       this.idSelectedAnswer = null;
+      this.randomAnswers = [];
 
       //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
       // do {
@@ -102,12 +105,31 @@ export default {
       this.store.wrongAnswers = 0;
       store.currentLevel = 0;
       this.selectRandomQuestion();
+      this.randomAnswers = [];
     },
 
     turnOnQuestion(index) {
       this.idSelectedAnswer = index;
       store.isClicked = true;
       this.stringClassToAdd = "temporary";
+    },
+
+    fiftyFity() {
+      this.randomAnswers = [];
+
+      do {
+        this.randomAnswerId = Math.floor(
+          Math.random() * this.questions[this.questionId].answers.length
+        );
+        if (
+          !this.randomAnswers.includes(this.randomAnswerId) &&
+          this.randomAnswerId !==
+            this.questions[this.questionId].correctAnswerId
+        ) {
+          this.randomAnswers.push(this.randomAnswerId);
+        }
+      } while (this.randomAnswers.length < 2);
+      console.log(this.randomAnswers);
     },
   },
   mounted() {
@@ -126,6 +148,7 @@ export default {
         <div class="container my-5">
           <div class="row row-cols-1 row-cols-lg-2">
             <Answer
+              v-show="!randomAnswers.includes(index)"
               v-for="(answer, index) in questions[questionId].answers"
               :key="index"
               :answer="answer"
@@ -146,7 +169,7 @@ export default {
         @checkAnswer="checkAnswer"
       />
     </div>
-    <Aside />
+    <Aside @fiftyFity="fiftyFity" />
   </div>
 </template>
 

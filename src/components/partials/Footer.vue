@@ -27,7 +27,7 @@ export default {
     <button
       v-if="!store.endGame && store.isClicked && !store.isCorrect"
       @click="checkAnswer()"
-      class="btn btn-light mx-2"
+      class="btn btn-custom mx-2"
     >
       L'accendiamo?
     </button>
@@ -36,7 +36,7 @@ export default {
     <button
       v-if="!store.endGame && store.isCorrect"
       @click="selectRandomQuestion()"
-      class="btn btn-light mx-2"
+      class="btn btn-custom mx-2"
     >
       Prossima domanda
     </button>
@@ -45,7 +45,7 @@ export default {
     <button
       v-if="store.endGame"
       @click="resetGame()"
-      class="btn btn-light mx-2"
+      class="btn btn-custom mx-2"
     >
       Rinizia
     </button>
