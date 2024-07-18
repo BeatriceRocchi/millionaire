@@ -28,6 +28,7 @@ export default {
       wrongAnswers: 0,
       randomAnswers: [],
       randomAnswerId: 0,
+      correctId: null,
     };
   },
   methods: {
@@ -55,6 +56,7 @@ export default {
       store.isCorrect = false;
       this.idSelectedAnswer = null;
       this.randomAnswers = [];
+      this.correctId = null;
 
       //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
       // do {
@@ -106,6 +108,7 @@ export default {
       store.currentLevel = 0;
       this.selectRandomQuestion();
       this.randomAnswers = [];
+      this.correctId = null;
     },
 
     turnOnQuestion(index) {
@@ -130,6 +133,10 @@ export default {
         }
       } while (this.randomAnswers.length < 2);
       console.log(this.randomAnswers);
+    },
+    phoneClicked() {
+      store.phoneClicked = true;
+      this.correctId = this.questions[this.questionId].correctAnswerId;
     },
   },
   mounted() {
@@ -163,13 +170,21 @@ export default {
         </div>
       </main>
 
+      <div
+        class="text-white text-center"
+        v-if="store.phoneClicked && correctId"
+      >
+        "Mh...credo che la risposta più probabile sia
+        {{ questions[questionId].answers[correctId] }}"
+      </div>
+
       <Footer
         @selectRandomQuestion="selectRandomQuestion"
         @resetGame="resetGame"
         @checkAnswer="checkAnswer"
       />
     </div>
-    <Aside @fiftyFity="fiftyFity" />
+    <Aside @fiftyFity="fiftyFity" @phoneClicked="phoneClicked" />
   </div>
 </template>
 

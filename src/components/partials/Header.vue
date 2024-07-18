@@ -13,14 +13,14 @@ export default {};
 <style lang="scss" scoped>
 header {
   background-color: #12148c;
-  height: 360px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .logo-box {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     overflow: hidden;
 
     img {

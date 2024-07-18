@@ -12,6 +12,11 @@ export default {
       console.log(store.fiftyFiftyClicked);
       this.$emit("fiftyFity");
     },
+    phoneClicked() {
+      store.phoneClicked = true;
+      console.log(store.phoneClicked);
+      this.$emit("phoneClicked");
+    },
   },
 };
 </script>
@@ -20,7 +25,11 @@ export default {
   <aside class="d-none d-lg-block">
     <ul class="d-flex justify-content-center align-items-center">
       <li>
-        <button class="btn btn-custom-help">
+        <button
+          class="btn btn-custom-help"
+          :class="store.phoneClicked ? 'blocked-blur' : ''"
+          @click="phoneClicked()"
+        >
           <i class="fa-solid fa-phone-volume"></i>
         </button>
       </li>

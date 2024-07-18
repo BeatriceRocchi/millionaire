@@ -16,4 +16,5 @@ export const store = reactive({
   endGame: false,
   currentLevel: 0,
   fiftyFiftyClicked: false,
+  phoneClicked: false,
 });
