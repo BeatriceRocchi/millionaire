@@ -12,7 +12,7 @@ export default {};
 
 <style lang="scss" scoped>
 header {
-  background-color: #12148c;
+  // background-color: #12148c;
   height: 250px;
   display: flex;
   justify-content: center;

@@ -17,4 +17,5 @@ export const store = reactive({
   currentLevel: 0,
   fiftyFiftyClicked: false,
   phoneClicked: false,
+  publicHelpClicked: false,
 });

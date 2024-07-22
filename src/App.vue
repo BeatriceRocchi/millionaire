@@ -6,6 +6,25 @@ import Footer from "./components/partials/Footer.vue";
 import Aside from "./components/partials/Aside.vue";
 import { store } from "./assets/data/store";
 import { questions } from "./assets/data/db.json";
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 export default {
   components: {
@@ -14,6 +33,7 @@ export default {
     Answer,
     Footer,
     Aside,
+    Bar,
   },
 
   data() {
@@ -29,6 +49,19 @@ export default {
       randomAnswers: [],
       randomAnswerId: 0,
       correctId: null,
+      chartData: {
+        labels: ["A", "B", "C", "D"],
+        datasets: [
+          {
+            label: "Opzioni risposta",
+            backgroundColor: "#ffa500",
+            data: [30, 15, 35, 25],
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: true,
+      },
     };
   },
   methods: {
@@ -57,6 +90,9 @@ export default {
       this.idSelectedAnswer = null;
       this.randomAnswers = [];
       this.correctId = null;
+      store.phoneClicked = false;
+      store.publicHelpClicked = false;
+      store.fiftyFiftyClicked = false;
 
       //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
       // do {
@@ -138,6 +174,10 @@ export default {
       store.phoneClicked = true;
       this.correctId = this.questions[this.questionId].correctAnswerId;
     },
+    publicHelp() {
+      store.publicHelpClicked = true;
+      this.correctId = this.questions[this.questionId].correctAnswerId;
+    },
   },
   mounted() {
     this.selectRandomQuestion();
@@ -152,7 +192,7 @@ export default {
 
       <main>
         <Question :question="questions[questionId]" />
-        <div class="container my-5">
+        <div class="container my-2">
           <div class="row row-cols-1 row-cols-lg-2">
             <Answer
               v-show="!randomAnswers.includes(index)"
@@ -183,8 +223,25 @@ export default {
         @resetGame="resetGame"
         @checkAnswer="checkAnswer"
       />
+
+      <div
+        class="text-white text-center"
+        id="custom-chart-box"
+        v-if="store.publicHelpClicked && correctId"
+      >
+        <Bar
+          id="my-chart-id"
+          class="chart-box"
+          :options="chartOptions"
+          :data="chartData"
+        />
+      </div>
     </div>
-    <Aside @fiftyFity="fiftyFity" @phoneClicked="phoneClicked" />
+    <Aside
+      @fiftyFity="fiftyFity"
+      @phoneClicked="phoneClicked"
+      @publicHelp="publicHelp"
+    />
   </div>
 </template>
 
@@ -196,14 +253,11 @@ export default {
     text-align: center;
     background-color: #11093a;
     color: white;
-    padding: 20px 40px;
+    padding: 0px 40px;
   }
 
-  footer {
-    text-align: center;
-    background-color: #11093a;
-    height: 150px;
-    padding: 20px;
+  .chart-box {
+    margin: 80px;
     color: white;
   }
 }

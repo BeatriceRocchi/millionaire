@@ -67,8 +67,7 @@ export default {
 footer {
   text-align: center;
   background-color: #11093a;
-  // height: 150px;
-  padding: 20px;
   color: white;
+  padding: 20px;
 }
 </style>

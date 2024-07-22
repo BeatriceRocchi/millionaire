@@ -8,14 +8,13 @@ export default {
   },
   methods: {
     fiftyFity() {
-      store.fiftyFiftyClicked = true;
-      console.log(store.fiftyFiftyClicked);
       this.$emit("fiftyFity");
     },
     phoneClicked() {
-      store.phoneClicked = true;
-      console.log(store.phoneClicked);
       this.$emit("phoneClicked");
+    },
+    publicHelp() {
+      this.$emit("publicHelp");
     },
   },
 };
@@ -34,7 +33,11 @@ export default {
         </button>
       </li>
       <li>
-        <button class="btn btn-custom-help">
+        <button
+          class="btn btn-custom-help"
+          :class="store.publicHelpClicked ? 'blocked-blur' : ''"
+          @click="publicHelp()"
+        >
           <i class="fa-solid fa-users"></i>
         </button>
       </li>
@@ -66,21 +69,17 @@ export default {
 aside {
   width: 300px;
   flex-shrink: 0;
-  background-color: #11093a;
-  box-shadow: #11093a;
-  border-left: 3px solid #227fb3;
+  background-color: rgba(white, 0.08);
   color: white;
-  padding: 30px 20px;
-  background: radial-gradient(#12148c, #11093a);
+  padding: 10px 20px;
 
   ul {
     list-style: none;
     padding: 0;
 
     li {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      padding: 10px;
+      margin-bottom: 10px;
+      padding: 8px;
       width: fit-content;
 
       &.active {
