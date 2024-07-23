@@ -90,9 +90,7 @@ export default {
       this.idSelectedAnswer = null;
       this.randomAnswers = [];
       this.correctId = null;
-      store.phoneClicked = false;
-      store.publicHelpClicked = false;
-      store.fiftyFiftyClicked = false;
+      store.publicHelpAvailable = false;
 
       //Estrazione random domanda con esclusione delle domande già estratte (solo versione non classica)
       // do {
@@ -145,6 +143,10 @@ export default {
       this.selectRandomQuestion();
       this.randomAnswers = [];
       this.correctId = null;
+      store.fiftyFiftyClicked = false;
+      store.phoneClicked = false;
+      store.publicHelpClicked = false;
+      store.publicHelpAvailable = true;
     },
 
     turnOnQuestion(index) {
@@ -154,6 +156,7 @@ export default {
     },
 
     fiftyFity() {
+      store.fiftyFiftyClicked = true;
       this.randomAnswers = [];
 
       do {
@@ -168,7 +171,6 @@ export default {
           this.randomAnswers.push(this.randomAnswerId);
         }
       } while (this.randomAnswers.length < 2);
-      console.log(this.randomAnswers);
     },
     phoneClicked() {
       store.phoneClicked = true;
@@ -176,7 +178,7 @@ export default {
     },
     publicHelp() {
       store.publicHelpClicked = true;
-      this.correctId = this.questions[this.questionId].correctAnswerId;
+      store.publicHelpAvailable = true;
     },
   },
   mounted() {
@@ -199,6 +201,7 @@ export default {
               v-for="(answer, index) in questions[questionId].answers"
               :key="index"
               :answer="answer"
+              :index="index"
               :classToAdd="
                 store.isClicked && idSelectedAnswer === index
                   ? stringClassToAdd
@@ -224,7 +227,8 @@ export default {
         @checkAnswer="checkAnswer"
       />
 
-      <div
+      <!-- Opzione visualizzazione aiuto del pubblico con Chartjs -->
+      <!-- <div
         class="text-white text-center"
         id="custom-chart-box"
         v-if="store.publicHelpClicked && correctId"
@@ -235,7 +239,7 @@ export default {
           :options="chartOptions"
           :data="chartData"
         />
-      </div>
+      </div> -->
     </div>
     <Aside
       @fiftyFity="fiftyFity"

@@ -18,4 +18,5 @@ export const store = reactive({
   fiftyFiftyClicked: false,
   phoneClicked: false,
   publicHelpClicked: false,
+  publicHelpAvailable: true,
 });
